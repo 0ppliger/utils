@@ -11,7 +11,7 @@ if [[ $USER != "root" ]]; then
 	exit 1
 fi
 
-if [[ ! -e /usr/share/mksite/site.template.conf ]]; then
+if [[ ! -e /usr/share/mksite.d/site.template.conf ]]; then
 	echo "error: missing site.template.conf"
 	exit 1
 fi
@@ -30,7 +30,7 @@ echo "Bienvenue sur $SITENAME.lan" > /var/www/$SITENAME/index.html
 
 # Configurer le server web
 export SITENAME
-cat /usr/share/mksite/site.template.conf | \
+cat /usr/share/mksite.d/site.template.conf | \
 	envsubst > /etc/apache2/sites-available/$SITENAME.conf
 a2ensite $SITENAME > /dev/null
 systemctl reload apache2
